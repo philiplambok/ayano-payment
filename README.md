@@ -965,7 +965,7 @@ Core Features :
 
     ```json
     {
-      "": {
+      "deposit": {
         "type": "take", 
         "amount": "70,000.00"
       }
