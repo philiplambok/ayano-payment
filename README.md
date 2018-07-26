@@ -119,7 +119,7 @@ Core Features :
     {
       "error": {
         "code": 401, 
-        "message": "Sorry, you haven't authentication"
+        "message": "Sorry, you're not authenticated"
       }
     }
     ```
@@ -186,7 +186,7 @@ Core Features :
     {
       "error": {
         "code": 401, 
-        "message": "Sorry, you haven't authentication"
+        "message": "Sorry, you're not authenticated"
       }
     } 
     ```
@@ -269,7 +269,7 @@ Core Features :
     {
       "error": {
         "code": 401, 
-        "message": "Sorry, you haven't authentication"
+        "message": "Sorry, you're not authenticated"
       }
     } 
     ```
@@ -334,7 +334,7 @@ Core Features :
     {
       "error": {
         "code": 401, 
-        "message": "Sorry, you haven't authentication"
+        "message": "Sorry, you're not authenticated"
       }
     }
     ```
@@ -400,7 +400,7 @@ Core Features :
     {
       "error": {
         "code": 401,
-        "message": "Sorry, you haven't authentication"
+        "message": "Sorry, you're not authenticated"
       }
     } 
     ```
@@ -417,7 +417,6 @@ Core Features :
   - **Notes** 
 
     Show list of roles just for admin 
-
 </details>
 
 ### Users 
@@ -458,8 +457,8 @@ Core Features :
     ```json
     {
       "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticate"
+        "code": 404, 
+        "message": "Sorry, you're user not found"
       }
     } 
     ```
@@ -673,7 +672,7 @@ Core Features :
     {
       "error": {
         "code": 401, 
-        "message": "Sorry, you're not authenticate"
+        "message": "Sorry, you're not authenticated"
       }
     } 
     ```
@@ -731,7 +730,7 @@ Core Features :
     {
       "error": {
         "code": 401, 
-        "message": "Sorry, you're not authenticate" 
+        "message": "Sorry, you're not authenticated" 
       }
     } 
     ```
@@ -746,3 +745,213 @@ Core Features :
     ```
 </details>
 
+### Deposits 
+
+<!-- show deposits -->
+<details>
+  <summary><b>Show Deposit</b></summary>
+  
+  - **URL** 
+
+    /api/users/:id/deposits
+
+  - **Method** 
+
+    `GET`
+
+  - **URL Params** 
+
+    `id=[integer]`
+
+  - **Data Params** 
+
+    None
+
+  - **Success Response** 
+
+    ```json
+    {
+      "deposit": {
+        "amount": "100,000.00"
+      }
+    } 
+    ```
+
+  - **Error Response** 
+
+    ```json 
+    {
+      "error": {
+        "code": 404, 
+        "message": "Sorry, user not found"
+      }
+    }
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 401, 
+        "message": "Sorry, you're not authenticated"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 403, 
+        "message": "Sorry, you haven't permission"
+      }
+    }
+    ```
+</details>
+
+<!-- save deposits -->
+<details>
+  <summary><b>Save Deposit</b></summary>
+
+  - **URL**
+
+    /api/users/:id/deposits/
+    
+  - **Method** 
+
+    `POST`
+
+  - **URL Params** 
+    
+    **Required** 
+    
+    `id=[integer]`
+
+  - **Data Params**
+
+    ```json
+    {
+      "type": "save", 
+      "ammount": "50,000.00"
+    } 
+    ```
+
+  - **Success Response** 
+
+    ```json
+    {
+      "deposit": {
+        "amount": "150,000.00"
+      }
+    }
+    ```
+
+  - **Error Response** 
+
+    ```json
+    {
+      "error": {
+        "code": 404, 
+        "message": "Sorry, user not found"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 401, 
+        "message": "Sorry, you're not authenticated"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 403,
+        "message": "Sorry, you haven't permission" 
+      }
+    } 
+    ```
+  
+  - **Notes** 
+    None
+</details>
+
+<!-- take deposits -->
+<details>
+  <summary><b>Take Deposit</b></summary>
+  
+  - **URL** 
+    
+    /api/users/:id/deposits
+
+  - **Method** 
+  
+    `POST`
+
+  - **URL Params** 
+
+    `id=[integer]`
+
+  - **Data Params** 
+
+    ```json
+    {
+      "": {
+        "type": "take", 
+        "amount": "70,000.00"
+      }
+    } 
+    ```
+
+  - **Success Response** 
+
+    ```json
+    {
+      "deposit": {
+        "amount": "80,000.00"
+      }
+    } 
+    ```
+
+  - **Error Response** 
+    ```json
+    {
+      "error": {
+        "code": 404,
+        "message": "Sorry, user not found"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 422, 
+        "message": "Sorry, your deposit is not enough"
+      }
+    } 
+    ```
+
+    ```json 
+    {
+      "error": {
+        "code": 401, 
+        "message": "Sorry, you're not authenticated"
+      }
+    }
+    ```
+
+    ```json 
+    {
+      "error": {
+        "code": 403, 
+        "message": "Sorry, you haven't permission"
+      }
+    }
+    ```
+
+  - **Notes**
+
+    None.
+</details>
