@@ -62,7 +62,6 @@ Core Features :
   - **Notes**
 
     For next request, add token in header: `Authorization: Bearer <your_token>`
-
 </details>
 
 ### Roles 
@@ -137,7 +136,6 @@ Core Features :
   - **Notes** 
 
     Create new role just for admin.  
-
 </details>
 
 <!-- show role -->
@@ -205,7 +203,6 @@ Core Features :
   - **Notes** 
 
     Show role just for admin
-
 </details>
 
 <!-- update role -->
@@ -289,7 +286,6 @@ Core Features :
   - **Notes** 
     
     Update role just for admin. 
-
 </details>
 
 <!-- delete role -->
@@ -355,7 +351,6 @@ Core Features :
   - **Notes** 
 
     Delete role just for admin.
-
 </details>
 
 <!-- show list roles -->
@@ -468,7 +463,6 @@ Core Features :
       }
     } 
     ```
-
 </details>
 
 <!-- create new user -->
@@ -595,5 +589,160 @@ Core Features :
   - **Notes** 
 
     None
-      
 </details>
+
+<!-- update user -->
+<details>
+  <summary><b>Update User</b></summary>
+
+  - **URL** 
+
+    /api/users/:id
+
+  - **Method** 
+
+    `PUT` | `PATCH`
+
+  - **URL Params** 
+
+    **Required** 
+
+    `id=[integer]`
+
+  - **Data Params** 
+
+    ```json
+    {
+      "user": {
+        "username": "pquestedit", 
+        "password": "secretcodeedit",
+        "password_confirmation": "secretcodeedit"
+      }
+    } 
+    ```
+
+  - **Success Response**
+
+    ```json
+    {
+      "user": {
+        "username": "pquestedit"
+      }
+    } 
+    ```
+
+  - **Error Response** 
+
+    ```json
+    {
+      "error": {
+        "code": 404, 
+        "message": "Sorry, user not found"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 422, 
+        "message": "Username can't be blank"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 422, 
+        "message": "Password can't be blank"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 422, 
+        "message": "Passoword doesn't match"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 401, 
+        "message": "Sorry, you're not authenticate"
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 403, 
+        "message": "Sorry, you haven't permission"
+      }
+    } 
+    ```
+
+  - **Notes** 
+
+    This feature just for owner or admin. 
+</details>
+
+<!-- delete user -->
+<details>
+  <summary><b>Delete User</b></summary>
+  
+  - **URL** 
+
+    /api/users/:id 
+
+  - **Method** 
+
+    `DELETE`
+
+  - **URL Params** 
+
+    **Required** 
+
+    `id=[integer]`
+
+  - **Data Params**
+
+    None
+
+  - **Success Response** 
+
+    ```json
+    {
+      "user": {
+        "id": 1, 
+        "username": "pquest"
+      }
+    } 
+    ```
+
+  - **Error Response** 
+    
+    ```json
+    {
+      "error": {
+        "code": 401, 
+        "message": "Sorry, you're not authenticate" 
+      }
+    } 
+    ```
+
+    ```json
+    {
+      "error": {
+        "code": 403, 
+        "message": "Sorry, you haven't permission"
+      }
+    } 
+    ```
+</details>
+
