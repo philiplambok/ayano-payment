@@ -429,7 +429,7 @@ Core Features :
 
 <!-- show current user-->
 <details>
-  <summary>Show Current User</summary>
+  <summary><b>Show Current User</b></summary>
 
   - **URL** 
 
