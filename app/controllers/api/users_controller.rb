@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :role] 
-  before_action :validation_avaiability_user, only: [:show, :update, :role]
+  before_action :set_user, only: [:show, :update, :role, :destroy] 
+  before_action :validation_avaiability_user, only: [:show, :update, :role, :destroy]
 
   def show
     json_response(@user)
@@ -22,6 +22,13 @@ class Api::UsersController < ApplicationController
       json_response(@user)
     else 
       error_response_username_blank
+    end
+  end
+
+  def destroy
+    cache = @user 
+    if @user.delete
+      json_response(cache)
     end
   end
 

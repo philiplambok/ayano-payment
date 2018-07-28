@@ -95,6 +95,23 @@ RSpec.describe "Api::Users", type: :request do
       end
     end
   end
+
+  describe "delete user" do 
+    let (:user) { create(:user, role: create(:role)) }
+    it "return deleted user" do 
+      delete api_user_path(user)
+
+      expect(response.body).to include(user.username)
+    end
+
+    context "user not found" do 
+      it "return user found message" do
+        delete "/api/users/99"
+
+        expect(response.body).to include("error", "404", "Sorry, user not found")
+      end
+    end
+  end
 end
 
 def user_params(user)
