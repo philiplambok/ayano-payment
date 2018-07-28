@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Api::Roles", type: :request do
   describe "show role" do
     it "return role if role found" do 
-      role = create(:role, name: "admin")
+      role = create(:role)
       get api_role_path(role)
 
       expect(json_parse(response.body)).to include(role_params(role))
@@ -18,8 +18,8 @@ RSpec.describe "Api::Roles", type: :request do
 
   describe "show all roles" do 
     it "returns roles" do
-      admin_role = create(:role, name: "admin")
-      member_role = create(:role, name: "member")
+      admin_role = create(:role, name: "test_one")
+      member_role = create(:role, name: "test_two")
       get api_roles_path 
 
       expect(response.body).to include(admin_role.id.to_s, admin_role.name, member_role.id.to_s, admin_role.name)      
@@ -28,7 +28,7 @@ RSpec.describe "Api::Roles", type: :request do
 
   describe "create new role" do
     it "return created role" do
-      role = build(:role, name: "admin")
+      role = build(:role)
       post api_roles_path, params: { role: { name: role.name } }
 
       expect(response.body).to include(role.name)
@@ -44,7 +44,7 @@ RSpec.describe "Api::Roles", type: :request do
 
   describe "update role" do 
     it "return updated role" do 
-      role = create(:role, name: "member")
+      role = create(:role)
       updated_role_name = "premium"
 
       put api_role_path(role), params: { role: { name: updated_role_name } }
