@@ -13,6 +13,7 @@ class Api::UsersController < ApplicationController
       json_response(@user)
     else 
       error_response_username_blank
+      error_response_password_blank
     end
   end
 
@@ -27,5 +28,9 @@ class Api::UsersController < ApplicationController
 
   def error_response_username_blank
     error_response(code: 422, message: "Username can't be blank") if @user.errors[:username].include?("can't be blank") 
+  end
+
+  def error_response_password_blank 
+    error_response(code: 422, message: "Password can't be blank") if @user.errors[:password].include?("can't be blank") 
   end
 end
