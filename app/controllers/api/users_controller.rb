@@ -1,22 +1,29 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :role] 
-  before_action :validation_avaiability_user, only: [:show, :role]
+  before_action :set_user, only: [:show, :update, :role] 
+  before_action :validation_avaiability_user, only: [:show, :update, :role]
 
   def show
     json_response(@user)
   end
 
   def create
-    @user = User.new(params.require(:user).permit(:username, :password, :password_confirmation))
+    @user = User.new(user_params)
 
     if @user.save 
       json_response(@user)
-    else 
+    else
       error_response_username_blank
       error_response_password_blank
     end
   end
 
+  def update
+    if @user.update_attributes(user_params)
+      json_response(@user)
+    else 
+      error_response_username_blank
+    end
+  end
 
   def role 
     json_response(@user.role)
@@ -25,6 +32,10 @@ class Api::UsersController < ApplicationController
   private 
   def set_user 
     @user = User.find_by_id(params[:id])
+  end
+
+  def user_params 
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 
   def validation_avaiability_user 

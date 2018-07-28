@@ -65,6 +65,36 @@ RSpec.describe "Api::Users", type: :request do
       end
     end
   end
+
+  describe "update user" do 
+    let (:user) { create(:user, role: create(:role)) }
+    it "return updated user" do 
+      updated_username = "pquest"
+      user.username = updated_username
+
+      put api_user_path(user), params: user_params(user)
+
+      expect(response.body).to include(updated_username) 
+    end
+
+    context "user not found" do 
+      it "return not found message" do 
+        put "/api/users/99", params: user_params(user)
+
+        expect(response.body).to include("error", "404", "Sorry, user not found")
+      end
+    end
+
+    context "validation error" do 
+      it "return username can't be blank" do 
+        user.username = ""
+
+        put api_user_path(user), params: user_params(user)
+
+        expect(response.body).to include("error", "422", "Username can't be blank")
+      end
+    end
+  end
 end
 
 def user_params(user)
