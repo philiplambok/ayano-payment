@@ -130,6 +130,29 @@ RSpec.describe "Api::Users", type: :request do
         expect(response.body).to include("error", "401", "Sorry, you're not authenticated") 
       end
     end
+
+    context "unexpected format" do
+      it "return not authenticated message" do 
+        get "/api/me", params: nil, headers: { authorization: "Bearer 2 3" }
+
+        expect(response.body).to include("error", "401", "Sorry, you're not authenticated")
+      end
+    end
+
+    context "not include Bearer text" do 
+      it "return not authenticated message" do 
+        get "/api/me", params: nil, headers: { authorization: "non non non" }
+
+        expect(response.body).to include("error", "401", "Sorry, you're not authenticated")
+      end
+    end
+
+    context "bad token" do 
+      it "return not authenticated message" do
+        get "/api/me", params: nil, headers: { authorization: "Bearer bad_token_here" }
+        expect(response.body).to include("error", "401", "Sorry, you're not authenticated")
+      end
+    end
   end
 end
 

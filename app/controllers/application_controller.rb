@@ -12,16 +12,26 @@ class ApplicationController < ActionController::API
   end
 
   def decode_token(token)
-    JWT.decode token, nil, false
+    begin
+      JWT.decode token, nil, false
+    rescue
+      nil
+    end
   end
 
   def current_user 
     # set token 
     return nil unless request.headers[:authorization]
-    token = request.headers[:authorization].split(" ").last
+
+    authorization_header = request.headers[:authorization].split(" ")
+
+    return nil unless authorization_header.count == 2
+    return nil unless authorization_header.first == "Bearer"
 
     # decode token 
-    decoded_token = decode_token(token)
+    decoded_token = decode_token(authorization_header.last)
+    return nil unless decoded_token
+    
     user_id = decoded_token[0]["user_id"] 
 
     # set user
