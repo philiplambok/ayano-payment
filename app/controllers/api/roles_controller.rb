@@ -17,7 +17,7 @@ class Api::RolesController < ApplicationController
     if @role.save
       json_response(@role)
     else 
-      error_response_name_blank if @role.errors[:name].include?("can't be blank")
+      error_response_name_blank(@role)
     end
   end
 
@@ -25,7 +25,7 @@ class Api::RolesController < ApplicationController
     if @role.update_attributes role_params 
       json_response(@role)
     else 
-      error_response_name_blank if @role.errors[:name].include? "can't be blank"
+      error_response_name_blank(@role)
     end
   end
 
@@ -53,7 +53,7 @@ class Api::RolesController < ApplicationController
     params.require(:role).permit(:name)
   end
 
-  def error_response_name_blank
-    error_response(code: "422", message: "Name can't be blank")
+  def error_response_name_blank(role)
+    error_response(code: "422", message: "Name can't be blank") if role.errors[:name].include? "can't be blank" 
   end
 end
