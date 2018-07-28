@@ -19,6 +19,25 @@ RSpec.describe "Api::Users", type: :request do
     end
   end
 
+  describe "show user role" do
+    it "return role" do 
+      role = create(:role)
+      user = create(:user, role: role)
+
+      get role_api_user_path(user)
+
+      expect(response.body).to include(role.name)
+    end
+
+    context "user not found" do 
+      it "return user not found message" do 
+        get "/api/users/99/role" 
+
+        expect(response.body).to include("error", "404", "Sorry, user not found")
+      end
+    end
+  end
+
   describe "create new user" do 
     it "return created user" do 
       user = build(:user) 

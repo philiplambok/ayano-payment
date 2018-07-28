@@ -1,6 +1,6 @@
 class Api::UsersController < ApplicationController
-  before_action :set_user, only: [:show] 
-  before_action :validation_avaiability_user, only: [:show]
+  before_action :set_user, only: [:show, :role] 
+  before_action :validation_avaiability_user, only: [:show, :role]
 
   def show
     json_response(@user)
@@ -15,6 +15,11 @@ class Api::UsersController < ApplicationController
       error_response_username_blank
       error_response_password_blank
     end
+  end
+
+
+  def role 
+    json_response(@user.role)
   end
 
   private 
