@@ -118,16 +118,16 @@ RSpec.describe "Api::Users", type: :request do
       user = create(:user, role: create(:role))
       token = generate_token(user_id: user.id)
 
-      get "/api/me", params: nil, headers: { authorization: "Bearer #{token}" }
+      get "/api/me", params: nil, headers: auth_params(user)
 
-      expect(response.body).to include(user.username)      
+      expect(response.body).to include(user.username)
     end
 
     context "no headers" do
       it "return not authenticated message" do 
         get "/api/me"
 
-        expect(response.body).to include("error", "401", "Sorry, you're not authenticated") 
+        expect_not_authenticated
       end
     end
 
@@ -135,7 +135,7 @@ RSpec.describe "Api::Users", type: :request do
       it "return not authenticated message" do 
         get "/api/me", params: nil, headers: { authorization: "Bearer 2 3" }
 
-        expect(response.body).to include("error", "401", "Sorry, you're not authenticated")
+        expect_not_authenticated
       end
     end
 
@@ -143,14 +143,15 @@ RSpec.describe "Api::Users", type: :request do
       it "return not authenticated message" do 
         get "/api/me", params: nil, headers: { authorization: "non non non" }
 
-        expect(response.body).to include("error", "401", "Sorry, you're not authenticated")
+        expect_not_authenticated
       end
     end
 
     context "bad token" do 
       it "return not authenticated message" do
         get "/api/me", params: nil, headers: { authorization: "Bearer bad_token_here" }
-        expect(response.body).to include("error", "401", "Sorry, you're not authenticated")
+
+        expect_not_authenticated
       end
     end
   end
