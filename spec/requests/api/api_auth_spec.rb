@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::Authentications", type: :request do
+RSpec.describe "Api::Auth", type: :request do
   describe "user sign in" do
     
     let (:user) { create(:user, role: create(:role)) }
@@ -8,7 +8,7 @@ RSpec.describe "Api::Authentications", type: :request do
     it "return jwt token" do
       post '/api/auth', params: { auth: { username: user.username, password: user.password } }
 
-      expect(response.body).to include("jwt", generate_token(user.id)) 
+      expect(response.body).to include("jwt", generate_token(user_id: user.id)) 
     end
 
     context "credential is wrong" do
@@ -19,9 +19,4 @@ RSpec.describe "Api::Authentications", type: :request do
       end
     end
   end
-end
-
-def generate_token(user_id)
-  payload = { user_id: user_id }
-  JWT.encode payload, nil, 'none'
 end

@@ -112,6 +112,25 @@ RSpec.describe "Api::Users", type: :request do
       end
     end
   end
+
+  describe "show current user" do 
+    it "return current user" do 
+      user = create(:user, role: create(:role))
+      token = generate_token(user_id: user.id)
+
+      get "/api/me", params: nil, headers: { authorization: "Bearer #{token}" }
+
+      expect(response.body).to include(user.username)      
+    end
+
+    context "no headers" do
+      it "return not authenticated message" do 
+        get "/api/me"
+
+        expect(response.body).to include("error", "401", "Sorry, you're not authenticated") 
+      end
+    end
+  end
 end
 
 def user_params(user)
