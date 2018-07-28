@@ -58,6 +58,14 @@ RSpec.describe "Api::Roles", type: :request do
 
       expect(response.body).to include("404", "Sorry, role not found")
     end
+
+    it "return name validation" do 
+      role = create(:role)
+
+      put api_role_path(role), params: { role: { name: nil } }
+
+      expect(response.body).to include("error", "422", "Name can't be blank")
+    end
   end
 
   describe "delete role" do
