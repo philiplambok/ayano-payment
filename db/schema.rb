@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_085425) do
+ActiveRecord::Schema.define(version: 2018_07_30_140707) do
 
   create_table "deposits", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -18,6 +18,14 @@ ActiveRecord::Schema.define(version: 2018_07_30_085425) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_deposits_on_user_id"
+  end
+
+  create_table "logs", force: :cascade do |t|
+    t.string "message"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_logs_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
