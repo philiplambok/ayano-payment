@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         get 'role'
         get 'deposits', to: 'deposits#index'
         post 'deposits', to: 'deposits#create'
+        post 'transaction', to: 'transaction#create'
       end
     end
   end

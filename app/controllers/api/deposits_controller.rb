@@ -3,6 +3,7 @@ class Api::DepositsController < ApplicationController
   before_action :validate_avaiability
   before_action :validate_auth
   before_action :validate_permission
+  before_action :validate_deposit
 
   def index 
     json_response(@user.deposit)
@@ -13,11 +14,6 @@ class Api::DepositsController < ApplicationController
     when "save"
       @user.add_deposit(params[:amount])
     when "take"
-      unless @user.take_deposit?(params[:amount])
-        error_response(code: 422, message: "Sorry, your deposit is not enough") 
-        return 
-      end 
-
       @user.take_deposit(params[:amount])
     end
 
@@ -39,5 +35,11 @@ class Api::DepositsController < ApplicationController
 
   def validate_permission 
     error_response(template: :forbidden) unless current_user.same?(@user)
-   end
+  end
+
+  def validate_deposit 
+    if params[:type] == "take"
+      error_response(template: :deposit_not_enough) unless current_user.take_deposit?(params[:amount])
+    end
+  end
 end

@@ -13,6 +13,8 @@ class ApplicationController < ActionController::API
       error_response(code: 403, message: "Sorry, you haven't permission")
     when :not_found
       error_response(code: 404, message: "Sorry, #{options[:model]} not found")
+    when :deposit_not_enough
+      error_response(code: 422, message: "Sorry, your deposit is not enough")
     end
   end
 

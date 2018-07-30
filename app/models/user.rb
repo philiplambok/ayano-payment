@@ -35,4 +35,9 @@ class User < ApplicationRecord
   def take_deposit?(amount) 
     deposit.amount >= amount.to_i
   end
+
+  def transfer(options)
+    take_deposit(options[:amount])
+    options[:to].add_deposit(options[:amount])
+  end
 end
