@@ -12,6 +12,7 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save 
+      @user.open_deposit!
       json_response(@user)
     else
       error_response_username_blank

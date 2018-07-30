@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :users do 
       member do 
         get 'role'
+        get 'deposits', to: 'deposits#index'
       end
     end
   end

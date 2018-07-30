@@ -23,4 +23,11 @@ RSpec.describe User, type: :model do
 
     expect(user_two.errors.full_messages).to include("Username has already been taken")
   end
+
+  it "is has one deposit" do
+    user = create(:user)
+    deposit = create(:deposit, user: user)
+
+    expect(user.deposit.amount).to eq(0)
+  end
 end
