@@ -10,6 +10,7 @@ require 'supports/factory_bot'
 require 'supports/json_support'
 require 'supports/auth_support'
 require 'supports/params_support'
+require 'supports/deposits_support'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are

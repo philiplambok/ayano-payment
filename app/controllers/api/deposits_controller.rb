@@ -12,6 +12,13 @@ class Api::DepositsController < ApplicationController
     case params[:type]
     when "save"
       @user.add_deposit(params[:amount])
+    when "take"
+      unless @user.take_deposit?(params[:amount])
+        error_response(code: 422, message: "Sorry, your deposit is not enough") 
+        return 
+      end 
+
+      @user.take_deposit(params[:amount])
     end
 
     json_response(@user.deposit)

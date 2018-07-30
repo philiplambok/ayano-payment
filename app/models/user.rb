@@ -26,4 +26,13 @@ class User < ApplicationRecord
     deposit.amount += amount.to_i
     deposit.save 
   end
+
+  def take_deposit(amount) 
+    deposit.amount -= amount.to_i
+    deposit.save
+  end
+
+  def take_deposit?(amount) 
+    deposit.amount >= amount.to_i
+  end
 end

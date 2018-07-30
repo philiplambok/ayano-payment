@@ -10,7 +10,7 @@ RSpec.describe "save deposit" do
 
   context "as owner" do 
     it "return amount" do 
-      post deposits_api_user_path(sample_user), params: { type: "save", amount: amount }, headers: auth_params(sample_user)
+      request_post_deposit({ type: "save", amount: amount, user: sample_user, as_user: sample_user })
       
       expect(response.body).to include("amount", amount)
     end
@@ -19,7 +19,7 @@ RSpec.describe "save deposit" do
   context "as hacker" do 
     let (:hacker) { create(:hacker) }
     it "return forbidden message" do 
-      post deposits_api_user_path(sample_user), params: { type: "save", amount: amount }, headers: auth_params(hacker)
+      request_post_deposit({type: "save", amount: amount, user: sample_user, as_user: hacker})
 
       expect_forbidden
     end
@@ -27,7 +27,7 @@ RSpec.describe "save deposit" do
 
   context "without auth" do 
     it "return not authenticated message" do 
-      post deposits_api_user_path(sample_user), params: { type: "save", amount: amount }
+      request_post_deposit({type: "save", amount: amount, user: sample_user, as_user: nil})
 
       expect_not_authenticated
     end
