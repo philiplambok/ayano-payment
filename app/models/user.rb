@@ -21,4 +21,9 @@ class User < ApplicationRecord
   def open_deposit!
     deposit = Deposit.create(user: self, amount: 0)
   end
+
+  def add_deposit(amount) 
+    deposit.amount += amount.to_i
+    deposit.save 
+  end
 end

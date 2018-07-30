@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       member do 
         get 'role'
         get 'deposits', to: 'deposits#index'
+        post 'deposits', to: 'deposits#create'
       end
     end
   end

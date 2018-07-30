@@ -8,6 +8,15 @@ class Api::DepositsController < ApplicationController
     json_response(@user.deposit)
   end
 
+  def create 
+    case params[:type]
+    when "save"
+      @user.add_deposit(params[:amount])
+    end
+
+    json_response(@user.deposit)
+  end
+
   private 
   def set_user 
     @user = User.find_by_id(params[:id])

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "user sign in" do
+RSpec.describe "user sign in", type: :request do
   let (:user) { create(:member) }
 
   it "return jwt token" do
