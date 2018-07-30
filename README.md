@@ -838,9 +838,7 @@ Core Features :
 
     ```json
     {
-      "deposit": {
-        "amount": "100,000.00"
-      }
+      "amount": "100000"
     } 
     ```
 
@@ -897,7 +895,7 @@ Core Features :
     ```json
     {
       "type": "save", 
-      "ammount": "50,000.00"
+      "ammount": "50000"
     } 
     ```
 
@@ -905,9 +903,7 @@ Core Features :
 
     ```json
     {
-      "deposit": {
-        "amount": "150,000.00"
-      }
+      "amount": "150000"
     }
     ```
 
@@ -965,10 +961,8 @@ Core Features :
 
     ```json
     {
-      "deposit": {
-        "type": "take", 
-        "amount": "70,000.00"
-      }
+      "type": "take", 
+      "amount": "70000"
     } 
     ```
 
@@ -976,9 +970,7 @@ Core Features :
 
     ```json
     {
-      "deposit": {
-        "amount": "80,000.00"
-      }
+      "amount": "80000"
     } 
     ```
 
@@ -1049,7 +1041,7 @@ Core Features :
     {
       "transaction": {
         "to": 1,
-        "amount": "50,000.00" 
+        "amount": "50000" 
       }
     }
     ```
@@ -1059,7 +1051,7 @@ Core Features :
     ```json
     {
       "deposit": {
-        "ammount": "100,000.00"
+        "ammount": "100000"
       }
     } 
     ```
@@ -1135,19 +1127,19 @@ Core Features :
       "logs": [
         {
           "log": {
-            "message": "You send 200,000.00 to pquest",
+            "message": "You send 200000 to pquest",
             "created_at": "27-08-2017 15:30"
           }
         }, 
         {
           "log": {
-            "message": "You take deposit 100,000.00 ",
+            "message": "You take deposit 100000",
             "created_at": "27-08-2017 12:30"
           }
         }, 
         {
           "log": {
-            "message": "You added deposit 500,000.00 ",
+            "message": "You added deposit 500000",
             "created_at": "27-08-2017 10:30"
           }
         }, 
