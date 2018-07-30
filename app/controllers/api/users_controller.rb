@@ -1,6 +1,8 @@
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :role, :destroy] 
-  before_action :validation_avaiability_user, only: [:show, :update, :role, :destroy]
+  before_action :validate_avaiability_user, only: [:show, :update, :role, :destroy]
+  before_action :validate_auth, only: [:role, :update, :destroy]
+  before_action :validate_permission, only: [:role, :update, :destroy]
 
   def show
     json_response(@user)
@@ -37,7 +39,7 @@ class Api::UsersController < ApplicationController
   end
 
   private 
-  def set_user 
+  def set_user
     @user = User.find_by_id(params[:id])
   end
 
@@ -45,8 +47,16 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(:username, :password, :password_confirmation)
   end
 
-  def validation_avaiability_user 
-    error_response(code: 404, message: "Sorry, user not found") unless @user
+  def validate_avaiability_user 
+    error_response(template: :not_found, model: "user") unless @user
+  end
+
+  def validate_auth
+    error_response(template: :unauthorized) unless current_user
+  end
+
+  def validate_permission 
+    error_response(template: :forbidden) unless current_user.owner_or_admin?(@user)
   end
 
   def error_response_username_blank

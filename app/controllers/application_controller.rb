@@ -4,7 +4,16 @@ class ApplicationController < ActionController::API
   end
 
   def error_response(options)
-    json_response(error:{code: options[:code], message: options[:message]})
+    json_response(error:{ code: options[:code], message: options[:message] }) unless options[:template]
+
+    case options[:template]
+    when :unauthorized 
+      error_response(code: 401, message: "Sorry, you're not authenticated")
+    when :forbidden
+      error_response(code: 403, message: "Sorry, you haven't permission")
+    when :not_found
+      error_response(code: 404, message: "Sorry, #{options[:model]} not found")
+    end
   end
 
   def generate_token(payload)

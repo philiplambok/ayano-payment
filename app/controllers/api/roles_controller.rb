@@ -1,6 +1,8 @@
 class Api::RolesController < ApplicationController
   before_action :set_role, only: [:show, :update, :destroy]
   before_action :validate_avaiability, only: [:show, :update, :destroy]
+  before_action :validate_auth
+  before_action :validate_permission
   before_action :get_all_roles, only: [:index] 
     
   def index 
@@ -41,8 +43,16 @@ class Api::RolesController < ApplicationController
     @role = Role.find_by_id(params[:id])
   end
 
+  def validate_auth 
+    error_response(template: :unauthorized) unless current_user
+  end
+
   def validate_avaiability 
-    error_response(code: 404, message: "Sorry, role not found") unless @role 
+    error_response(template: :not_found, model: "role") unless @role 
+  end
+
+  def validate_permission
+    error_response(template: :forbidden) unless current_user.admin?
   end
 
   def get_all_roles 

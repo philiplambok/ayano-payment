@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Api::Auth", type: :request do
   describe "user sign in" do
     
-    let (:user) { create(:user, role: create(:role)) }
+    let (:user) { create(:member) }
 
     it "return jwt token" do
       post '/api/auth', params: { auth: { username: user.username, password: user.password } }
