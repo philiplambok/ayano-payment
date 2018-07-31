@@ -1188,5 +1188,8 @@ Core Features :
 3. Run `rails s`
 4. Test with api-tester like `curl` / `postman` / etc.. 
 
+## Version 
+Last Releases: [v1.0](https://github.com/philiplambok/ayano-payment/releases) 
+
 ## Licenses
 MIT License. 
