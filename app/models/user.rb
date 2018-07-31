@@ -3,6 +3,7 @@ class User < ApplicationRecord
   
   has_secure_password
   has_one :deposit
+  has_many :logs
   
   validates :username, presence: true, uniqueness: true
 
@@ -22,14 +23,16 @@ class User < ApplicationRecord
     deposit = Deposit.create(user: self, amount: 0)
   end
 
-  def add_deposit(amount) 
-    deposit.amount += amount.to_i
-    deposit.save 
+  def add_deposit(options)
+    deposit.amount += options[:amount].to_i
+    deposit.save
+    logs.create(message: "You added deposit #{options[:amount]}") if options[:log]
   end
 
-  def take_deposit(amount) 
-    deposit.amount -= amount.to_i
+  def take_deposit(options)
+    deposit.amount -= options[:amount].to_i
     deposit.save
+    logs.create(message: "You take deposit #{options[:amount]}") if options[:log]
   end
 
   def take_deposit?(amount) 
@@ -37,7 +40,7 @@ class User < ApplicationRecord
   end
 
   def transfer(options)
-    take_deposit(options[:amount])
-    options[:to].add_deposit(options[:amount])
+    # take_deposit(amount: options[:amount])
+    # options[:to].add_deposit(amount: options[:amount])
   end
 end

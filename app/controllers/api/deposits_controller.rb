@@ -12,9 +12,9 @@ class Api::DepositsController < ApplicationController
   def create 
     case params[:type]
     when "save"
-      @user.add_deposit(params[:amount])
+      @user.add_deposit({ amount: params[:amount], log: true})
     when "take"
-      @user.take_deposit(params[:amount])
+      @user.take_deposit({ amount: params[:amount], log: true })
     end
 
     json_response(@user.deposit)
