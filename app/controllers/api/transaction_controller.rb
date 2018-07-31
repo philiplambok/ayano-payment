@@ -6,7 +6,7 @@ class Api::TransactionController < ApplicationController
   before_action :validate_permission
 
   def create
-    @user.transfer(to: @target_user, amount: params[:amount])
+    @user.transfer(to: @target_user, amount: params[:amount], log: true)
     json_response(@user.deposit)
   end
 

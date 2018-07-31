@@ -5,7 +5,7 @@ RSpec.describe "take deposit", type: :request do
 
   before do 
     sample_user.open_deposit!
-    sample_user.add_deposit("500000")
+    sample_user.add_deposit({ amount: "500000" })
   end
  
   context "as owner" do 

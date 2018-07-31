@@ -40,7 +40,8 @@ class User < ApplicationRecord
   end
 
   def transfer(options)
-    # take_deposit(amount: options[:amount])
-    # options[:to].add_deposit(amount: options[:amount])
+    take_deposit({amount: options[:amount]})
+    options[:to].add_deposit({amount: options[:amount]})
+    logs.create(message: "You send #{options[:amount]} to #{options[:to].username}")
   end
 end

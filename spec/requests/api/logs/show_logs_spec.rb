@@ -35,4 +35,21 @@ RSpec.describe "show logs", type: :request do
       end
     end
   end
+
+  describe "transfer" do 
+    before do 
+      target_user.open_deposit!
+      user.add_deposit({ amount: "100000" })
+    end
+
+    context "as owner" do 
+      it "return send deposit messsage" do 
+        request_transaction({ user: user, to: target_user, amount: "20000", as: user })
+
+        get logs_api_user_path(user), headers: auth_params(user)
+
+        expect(response.body).to include("message", "You send 20000 to #{target_user.username}")
+      end
+    end
+  end
 end
