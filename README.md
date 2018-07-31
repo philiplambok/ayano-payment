@@ -1,5 +1,5 @@
 # Ayano Payment
-Ayano Payment is rails api-only project for learning tdd (Test driven developemt).
+Ayano Payment is rails api-only project for learning tdd (Test driven development).
 
 ## Overview
 Ayano payment or Ayano-Pay is payment or bank gateway service.
@@ -1180,3 +1180,13 @@ Core Features :
 
     None. 
 </details>
+
+## Usage 
+1. Clone the repo
+2. Run `bundle` 
+3. Run `bin/rspec` to test that everything works. 
+3. Run `rails s`
+4. Test with api-tester like `curl` / `postman` / etc.. 
+
+## Licenses
+MIT License. 
