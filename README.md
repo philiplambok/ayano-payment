@@ -50,15 +50,9 @@ Core Features :
     ```
 
   - **Error Response** 
-
-    ```json 
-    {
-      "error": {
-        "code": 422, 
-        "message": "Sorry, username or password is wrong"
-      }
-    } 
-    ```
+    Code | Message 
+    --- | --- 
+    422 | Sorry, username or password is wrong 
 
   - **Notes**
 
