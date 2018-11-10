@@ -50,6 +50,7 @@ Core Features :
     ```
 
   - **Error Response** 
+    
     Code | Message 
     --- | --- 
     422 | Sorry, username or password is wrong 
