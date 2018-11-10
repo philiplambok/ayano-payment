@@ -51,7 +51,7 @@ Core Features :
 
   - **Error Response** 
     
-    Code | Message 
+    Status | Message 
     --- | --- 
     422 | Sorry, username or password is wrong 
 
@@ -61,6 +61,59 @@ Core Features :
 </details>
 
 ### Roles 
+
+<!-- show list roles -->
+<details>
+  <summary><b>Show List Roles</b></summary>
+
+  - **URL** 
+  
+    /api/roles
+
+  - **Method** 
+
+    `GET`
+
+  - **URL Params** 
+    
+    None
+
+  - **Data Params** 
+
+    None 
+
+  - **Success Response** 
+
+    ```json
+    {
+      "roles": [
+        {
+          "role": {
+            "id": 1, 
+            "name": "admin"
+          }
+        }, 
+        {
+          "role": {
+            "id": 2, 
+            "name": "member"
+          }
+        }
+      ]
+    } 
+    ```
+  
+  - **Error Response** 
+
+    Status | Message
+    --- | --- 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission
+
+  - **Notes** 
+
+    Show list of roles just for admin 
+</details>
 
 <!-- create new role -->
 <details>
@@ -102,32 +155,11 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 422, 
-        "message": "Name can't be blank"
-      }
-    }
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    }
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403,
-        "message": "Sorry, you haven't permission"
-      }
-    }
-    ```
+    Status | Message
+    --- | --- 
+    422 | Name can't be blank
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission 
 
   - **Notes** 
 
@@ -169,32 +201,10 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, role not found"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
+    Status | Message 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission
+    404 | Sorry, role not found 
 
   - **Notes** 
 
@@ -243,41 +253,11 @@ Core Features :
 
   - **Error Response** 
     
-    ```json 
-    {
-      "error": {
-        "code": 422,
-        "message": "Sorry, role not found" 
-      }
-    }
-    ```
-
-    ```json 
-    {
-      "error": {
-        "code": 422,
-        "message": "Name can't be blank" 
-      }
-    }
-    ```
-  
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
+    Status | Message 
+    --- | --- 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission 
+    422 | Name can't be blank, Role can't be blank 
 
   - **Notes** 
     
@@ -317,102 +297,14 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, role not found"
-      }
-    } 
-    ```
+    Status | Message 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission 
+    404 | Role not found
 
-    ```json 
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    }
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
-  
   - **Notes** 
 
     Delete role just for admin.
-</details>
-
-<!-- show list roles -->
-<details>
-  <summary><b>Show List Roles</b></summary>
-
-  - **URL** 
-  
-    /api/roles
-
-  - **Method** 
-
-    `GET`
-
-  - **URL Params** 
-    
-    None
-
-  - **Data Params** 
-
-    None 
-
-  - **Success Response** 
-
-    ```json
-    {
-      "roles": [
-        {
-          "role": {
-            "id": 1, 
-            "name": "admin"
-          }
-        }, 
-        {
-          "role": {
-            "id": 2, 
-            "name": "member"
-          }
-        }
-      ]
-    } 
-    ```
-  
-  - **Error Response** 
-
-    ```json
-    {
-      "error": {
-        "code": 401,
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
-
-  - **Notes** 
-
-    Show list of roles just for admin 
 </details>
 
 ### Users 
@@ -450,14 +342,12 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, you're user not found"
-      }
-    } 
-    ```
+    Status | Message 
+    --- | --- 
+    404 | User not found 
+
+  - **Notes** 
+    Don't check authenticated status when visit this.
 </details>
 
 <!-- create new user -->
@@ -500,41 +390,9 @@ Core Features :
 
     - **Error Response** 
       
-      ```json 
-      {
-        "error": {
-          "code": 422, 
-          "message": "Username can't be blank"
-        }
-      }
-      ```
-
-       ```json 
-      {
-        "error": {
-          "code": 422, 
-          "message": "Password can't be blank"
-        }
-      }
-      ```
-
-       ```json 
-      {
-        "error": {
-          "code": 422, 
-          "message": "Password doesn't match"
-        }
-      }
-      ```
-
-       ```json 
-      {
-        "error": {
-          "code": 422, 
-          "message": "Username has already been taken"
-        }
-      }
-      ```
+      Status | Message 
+      --- | --- 
+      422 | Username can't be blank, Password can't be blank, Password doesn't match 
 </details>
 
 <!-- show user -->
@@ -571,19 +429,10 @@ Core Features :
     ```
 
   - **Error Response** 
+    
+    Status | Message 
+    404 | User not found
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found"
-      }
-    } 
-    ```
-  
-  - **Notes** 
-
-    None
 </details>
 
 <!-- update user -->
@@ -628,63 +477,15 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 422, 
-        "message": "Username can't be blank"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 422, 
-        "message": "Password can't be blank"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 422, 
-        "message": "Passoword doesn't match"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
+    Status | Message 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission
+    404 | User not found 
+    422 | Username can't be blank, Password can't be blank, Password doesn't match
 
   - **Notes** 
 
-    This feature just for owner or admin. 
+    This feature just can be used by owner or admin. 
 </details>
 
 <!-- delete user -->
@@ -722,23 +523,10 @@ Core Features :
 
   - **Error Response** 
     
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated" 
-      }
-    } 
-    ```
+    Status | Message
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission 
 
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
 </details>
 
 <!-- show user role -->
@@ -774,32 +562,10 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found" 
-      }
-    }
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated" 
-      }
-    }
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, you haven't permission" 
-      }
-    }
-    ```
+    Status | Message 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission
+    404 | User not found
 
   - **Notes** 
 
@@ -839,32 +605,12 @@ Core Features :
 
   - **Error Response** 
 
-    ```json 
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found"
-      }
-    }
-    ```
+    Status | Message 
+    --- | --- 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission
+    404 | User not found
 
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    }
-    ```
 </details>
 
 <!-- save deposits -->
@@ -904,32 +650,11 @@ Core Features :
 
   - **Error Response** 
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403,
-        "message": "Sorry, you haven't permission" 
-      }
-    } 
-    ```
+    Status | Message 
+    --- | --- 
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you haven't permission 
+    404 | User not found 
   
   - **Notes** 
 
@@ -970,41 +695,12 @@ Core Features :
     ```
 
   - **Error Response** 
-    ```json
-    {
-      "error": {
-        "code": 404,
-        "message": "Sorry, user not found"
-      }
-    } 
-    ```
 
-    ```json
-    {
-      "error": {
-        "code": 422, 
-        "message": "Sorry, your deposit is not enough"
-      }
-    } 
-    ```
-
-    ```json 
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    }
-    ```
-
-    ```json 
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    }
-    ```
+    Status | Message 
+    401 | Sorry, you're not authenticated
+    403 | Sorry, you don't have permission
+    404 | User not found 
+    422 | Sorry, your deposit is not enough
 
   - **Notes**
 
@@ -1052,42 +748,13 @@ Core Features :
     ```
 
   - **Error Response** 
-  
-    ```json
-    {
-      "error": {
-        "code": 422, 
-        "message": "Sorry, your deposit is not enough"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 403, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
+    
+    Status | Message 
+    --- | ---
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission 
+    404 | Sorry, user not found 
+    422 | Sorry, your deposit is not enough
 
   - **Notes** 
 
@@ -1144,32 +811,11 @@ Core Features :
 
   - **Error Response**
 
-    ```json
-    {
-      "error": {
-        "code": 404, 
-        "message": "Sorry, user not found"
-      }
-    } 
-    ``` 
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you're not authenticated"
-      }
-    } 
-    ```
-
-    ```json
-    {
-      "error": {
-        "code": 401, 
-        "message": "Sorry, you haven't permission"
-      }
-    } 
-    ```
+    Status | Message 
+    --- | ---
+    401 | Sorry, you're not authenticated 
+    403 | Sorry, you don't have permission
+    404 | User not found 
 
   - **Notes** 
 
